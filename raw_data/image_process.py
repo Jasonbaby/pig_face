@@ -8,6 +8,7 @@ import time
 import shutil
 
 
+
 #reshape the images to a square
 def process_img(raw_path, result_path):
   img4 = Image.open(raw_path)
