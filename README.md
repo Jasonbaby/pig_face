@@ -4,14 +4,14 @@ This repository is used to save the code for a competition
 若对以下描述有任何疑问，请及时与我们联系。
 邮箱: jiexin_zheng@qq.com
 
-1.	运行环境 
+## 1.	运行环境 
 
 Ubuntu 16.04  python 2.7.12  cuda8.0  cudnn6.0  tensorflow 1.3.0
 
 GPU 4*TITAN XP
 
 
-2. 从视频中截取出猪：
+## 2. 从视频中截取出猪：
 
 (1)为了排除背景数据对模型的影响，我们使用yolo-9000算法提取出视频中每一帧的猪，代码来源于https://github.com/philipperemy/yolo-9000. 
 我们对其代码做了修改，将yolo解压包的代码解压后覆盖 darknet/src下同名文件即可
@@ -25,7 +25,7 @@ GPU 4*TITAN XP
 (5)最后得到94677张图片
 
 
-3. 预处理以及生成数据集
+## 3. 预处理以及生成数据集
 
 (1)运行raw_data/image_process.py， 将上一步得到的图片通过padding的方法变为正方形，保证在之后的步骤中resize操作不会扭曲图片
 
@@ -33,7 +33,7 @@ GPU 4*TITAN XP
 
 (3)运行raw_data/create_h5_dataset.h5, 将数据生成h5文件，这一步之后会得到50个储存训练集的.h5文件，以及50个储存验证集.h5文件
 
-4. 模型
+## 4. 模型
 
 (1)本模型基于细粒度识别模型bilinear cnn做的改进，参考源码来自于https://github.com/abhaydoke09/Bilinear-CNN-TensorFlow
 参考论文 vis-www.cs.umass.edu/bcnn/docs/bcnn_iccv15.pdf
@@ -49,7 +49,7 @@ Bilinear cnn是一个端到端的网络模型，该模型在CUB200-2011数据集
 (5)训练过程中加入实时的数据增强，包括旋转、随机改变对比度、随机改变亮度、随机crop. 训练时全连接层的drop out概率为0.5
 
 
-4. 结构
+## 4. 结构
 
 (1)train/read_data.py 是读取数据的结构。实现大数据的分次加载。
 
@@ -59,7 +59,7 @@ Bilinear cnn是一个端到端的网络模型，该模型在CUB200-2011数据集
 
 (4)train/predict_resvgg.py 输出预测结果
 
-5. 加载预训练模型，微调
+## 5. 加载预训练模型，微调
 
 (1)在读取resvgg模型时，令finetune=False,实现只训练最后的全连接层。并且调用load_initial_weights(sess)，读取预训练的vgg的卷积层的参数
 
@@ -67,7 +67,7 @@ Bilinear cnn是一个端到端的网络模型，该模型在CUB200-2011数据集
 
 (3)将过程中得到的最优模型保存下来
 
-6. 全网络训练
+## 6. 全网络训练
 
 (1)在读取resvgg模型时，令finetune=True。 调用load_own_weight(sess , model_path)，读取上一步得到的模型
 
@@ -76,11 +76,11 @@ Bilinear cnn是一个端到端的网络模型，该模型在CUB200-2011数据集
 (3)将过程中得到的最优模型保存下来
 
 
-7. 后期调整
+## 7. 后期调整
 
 实际训练过程中，只有第一次会在所有数据上训练满200次。在得到保存下来的模型后，之后的调参过程只取大约1/4的数据进行继续训练
 
-8. 预测
+## 8. 预测
 
 (1)运行 predict_resvgg.py 预测结果
 
