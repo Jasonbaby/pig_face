@@ -1,8 +1,9 @@
 # pig_face
 This repository is used to save the code for a competition
+本项目最终排名 15/1386
 
 若对以下描述有任何疑问，请及时与我们联系。
-邮箱: jiexin_zheng@qq.com
+邮箱: jiexin_zheng@qq.com 
 
 ## 1.	运行环境 
 
